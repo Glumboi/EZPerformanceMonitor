@@ -12,13 +12,14 @@ An easy little tool that lets uou monitor you're ram, cpu and gpu usage written 
 # V1.1
 -Fixed little bugs that caused unhandled exceptions
 
+# V1.2
+-Removed the download speed display due to inaccuracy 
+
 
 # Features
 -Usage graph for Ram, CPU, GPU
 
 -Always ontop button
-
--Displays internet download speed
 
 -Notifyicon when minimizing
 
