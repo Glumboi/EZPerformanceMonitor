@@ -335,6 +335,7 @@
     <Compile Include="Core\GetTemp.cs" />
     <Compile Include="Core\Internet.cs" />
     <Compile Include="Core\SystemUsage.cs" />
+    <Compile Include="Core\UiChanger.cs" />
     <Compile Include="Core\VersionControl.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

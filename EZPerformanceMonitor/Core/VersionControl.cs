@@ -12,7 +12,7 @@ namespace EZPerformanceMonitor.Core
             //Get all releases from GitHub
             //Source: https://octokitnet.readthedocs.io/en/latest/getting-started/
             var client = new GitHubClient(new ProductHeaderValue("EZPCPM"));
-            var releases = await client.Repository.Release.GetAll("Glumboi", "EZAutoclicker");
+            var releases = await client.Repository.Release.GetAll("Glumboi", "EZPerformanceMonitor");
 
             //Setup the versions
             var latestGitHubVersion = new Version(releases[0].TagName);

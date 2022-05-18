@@ -30,9 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            Telerik.RadToastNotificationManager.RadToastNotification radToastNotification11 = new Telerik.RadToastNotificationManager.RadToastNotification();
+            Telerik.RadToastNotificationManager.RadToastNotification radToastNotification2 = new Telerik.RadToastNotificationManager.RadToastNotification();
             this.bunifuRadialGauge_cpu = new Bunifu.UI.WinForms.BunifuRadialGauge();
-            this.UpdateTimer = new System.Windows.Forms.Timer(this.components);
             this.bunifuRadialGauge_ram = new Bunifu.UI.WinForms.BunifuRadialGauge();
             this.bunifuRadialGauge_gpu = new Bunifu.UI.WinForms.BunifuRadialGauge();
             this.groupBox_GPU = new System.Windows.Forms.GroupBox();
@@ -51,6 +50,7 @@
             this.Github_notify = new System.Windows.Forms.NotifyIcon(this.components);
             this.crystalTheme1 = new Telerik.WinControls.Themes.CrystalTheme();
             this.label1 = new System.Windows.Forms.Label();
+            this.tick = new System.Windows.Forms.Timer(this.components);
             this.groupBox_GPU.SuspendLayout();
             this.groupBox_CPU.SuspendLayout();
             this.groupBox_Ram.SuspendLayout();
@@ -93,11 +93,6 @@
             this.bunifuRadialGauge_cpu.ValueByTransition = 0;
             this.bunifuRadialGauge_cpu.ValueLabelColor = System.Drawing.Color.Black;
             this.bunifuRadialGauge_cpu.WarningMark = 90;
-            // 
-            // UpdateTimer
-            // 
-            this.UpdateTimer.Enabled = true;
-            this.UpdateTimer.Tick += new System.EventHandler(this.timer_update_Tick);
             // 
             // bunifuRadialGauge_ram
             // 
@@ -273,13 +268,13 @@
             // 
             // Github_toast
             // 
-            radToastNotification11.BindingData = null;
-            radToastNotification11.DeliveryTime = new System.DateTimeOffset(1, 1, 1, 0, 0, 0, 0, System.TimeSpan.Parse("00:00:00"));
-            radToastNotification11.Name = "ToastGeneric1";
-            radToastNotification11.Tag = null;
-            radToastNotification11.TemplateType = Telerik.RadToastNotificationManager.RadToastTemplateType.ToastGeneric;
-            radToastNotification11.Xml = null;
-            this.Github_toast.ToastNotifications.Add(radToastNotification11);
+            radToastNotification2.BindingData = null;
+            radToastNotification2.DeliveryTime = new System.DateTimeOffset(1, 1, 1, 0, 0, 0, 0, System.TimeSpan.Parse("00:00:00"));
+            radToastNotification2.Name = "ToastGeneric1";
+            radToastNotification2.Tag = null;
+            radToastNotification2.TemplateType = Telerik.RadToastNotificationManager.RadToastTemplateType.ToastGeneric;
+            radToastNotification2.Xml = null;
+            this.Github_toast.ToastNotifications.Add(radToastNotification2);
             // 
             // Github_notify
             // 
@@ -297,9 +292,14 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "label1";
             // 
+            // tick
+            // 
+            this.tick.Enabled = true;
+            this.tick.Tick += new System.EventHandler(this.tick_Tick);
+            // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(238, 586);
+            this.ClientSize = new System.Drawing.Size(233, 586);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ToggleSwitch_ontop);
             this.Controls.Add(this.bunifuLabel2);
@@ -329,7 +329,6 @@
 
         private System.Windows.Forms.Timer timer_update;
         private Bunifu.UI.WinForms.BunifuRadialGauge bunifuRadialGauge_cpu;
-        private System.Windows.Forms.Timer UpdateTimer;
         private Bunifu.UI.WinForms.BunifuRadialGauge bunifuRadialGauge_ram;
         private Bunifu.UI.WinForms.BunifuRadialGauge bunifuRadialGauge_gpu;
         private System.Windows.Forms.GroupBox groupBox_GPU;
@@ -347,7 +346,8 @@
         private Telerik.WinControls.UI.RadToastNotificationManager Github_toast;
         private System.Windows.Forms.NotifyIcon Github_notify;
         private Telerik.WinControls.Themes.CrystalTheme crystalTheme1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer tick;
+        public System.Windows.Forms.Label label1;
     }
 }
 

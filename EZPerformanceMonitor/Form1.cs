@@ -28,25 +28,6 @@ namespace EZPerformanceMonitor
             InitializeComponent();
         }
 
-        private void timer_update_Tick(object sender, EventArgs e)
-        {
-            //---Used later---\\
-
-            if (bunifuRadialGauge_cpu.Value == 0 && bunifuRadialGauge_ram.Value == 0 && bunifuRadialGauge_gpu.Value == 0)
-            {
-                this.Hide();
-                _splash.Show();
-            }
-            else
-            {
-                this.Show();
-                _splash.Hide();
-
-                //timer_update.Stop();
-            }
-            
-        }
-
         private async Task<string> GetGithubVersionAsync()
         {
             //Get all releases from GitHub
@@ -72,7 +53,8 @@ namespace EZPerformanceMonitor
                     bunifuRadialGauge_cpu.Value = _usages[0];
                     bunifuRadialGauge_ram.Value = _usages[1];
                     bunifuRadialGauge_gpu.Value = _usages[2];
-                    label1.Text = "Internet download speed: " + _in.CheckInternetSpeed().ToString() + " Kbps";
+                    UiChanger.SetControlPropertyThreadSafe(label1, "Text", "Internet download speed: " + _in.CheckInternetSpeed().ToString() + " Kbps");
+                    //label1.Text = "Internet download speed: " + _in.CheckInternetSpeed().ToString() + " Kbps";
                 }
             });
         }
@@ -121,7 +103,7 @@ namespace EZPerformanceMonitor
                                                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (_dlg == DialogResult.Yes)
                 {
-                    Process.Start("https://github.com/");
+                    Process.Start("https://github.com/Glumboi/EZPerformanceMonitor/releases/");
                 }
             }
         }
@@ -208,6 +190,23 @@ namespace EZPerformanceMonitor
         {
             Process.Start("https://github.com/Glumboi/EZAutoclicker/releases/tag/3.0.0");
         }
-        
+
+        private void tick_Tick(object sender, EventArgs e)
+        {
+            //---Used later---\\
+
+            if (bunifuRadialGauge_cpu.Value == 0 && bunifuRadialGauge_ram.Value == 0 && bunifuRadialGauge_gpu.Value == 0)
+            {
+                this.Hide();
+                _splash.Show();
+            }
+            else
+            {
+                this.Show();
+                _splash.Hide();
+
+                tick.Stop();
+            }
+        }
     }
 }
