@@ -108,8 +108,12 @@ namespace EZPerformanceMonitor
 
         private void ShowWindow()
         {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }
+            radContextMenu_notify.DropDown.Hide();
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -157,7 +161,8 @@ namespace EZPerformanceMonitor
 
         private void CloseWindow_Event(object sender, EventArgs e)
         {
-            Application.Exit();
+            radContextMenu_notify.DropDown.Hide();
+            Close();
         }
 
         private void ShowWindow_Event(object sender, EventArgs e)
@@ -191,8 +196,6 @@ namespace EZPerformanceMonitor
 
         private void tick_Tick(object sender, EventArgs e)
         {
-            //---Used later---\\
-
             if (bunifuRadialGauge_cpu.Value == 0 && bunifuRadialGauge_ram.Value == 0 && bunifuRadialGauge_gpu.Value == 0)
             {
                 this.Hide();
