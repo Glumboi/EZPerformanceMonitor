@@ -1,4 +1,5 @@
-![alt text](https://i.ibb.co/rHgbBvn/Icon.png)
+![alt text]([https://i.ibb.co/rHgbBvn/Icon.png)
+
 
 # EZPerformanceMonitor
 An easy little tool that lets uou monitor you're ram, cpu and gpu usage written in C# WInforms .NET Framework 4.8
