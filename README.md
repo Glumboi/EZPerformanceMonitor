@@ -1,4 +1,4 @@
-![alt text]([https://i.ibb.co/rHgbBvn/Icon.png)
+![alt text](https://i.ibb.co/rHgbBvn/Icon.png)
 
 
 # EZPerformanceMonitor
