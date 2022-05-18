@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            Telerik.RadToastNotificationManager.RadToastNotification radToastNotification2 = new Telerik.RadToastNotificationManager.RadToastNotification();
+            Telerik.RadToastNotificationManager.RadToastNotification radToastNotification3 = new Telerik.RadToastNotificationManager.RadToastNotification();
             this.bunifuRadialGauge_cpu = new Bunifu.UI.WinForms.BunifuRadialGauge();
             this.bunifuRadialGauge_ram = new Bunifu.UI.WinForms.BunifuRadialGauge();
             this.bunifuRadialGauge_gpu = new Bunifu.UI.WinForms.BunifuRadialGauge();
@@ -49,7 +49,6 @@
             this.Github_toast = new Telerik.WinControls.UI.RadToastNotificationManager(this.components);
             this.Github_notify = new System.Windows.Forms.NotifyIcon(this.components);
             this.crystalTheme1 = new Telerik.WinControls.Themes.CrystalTheme();
-            this.label1 = new System.Windows.Forms.Label();
             this.tick = new System.Windows.Forms.Timer(this.components);
             this.groupBox_GPU.SuspendLayout();
             this.groupBox_CPU.SuspendLayout();
@@ -268,13 +267,13 @@
             // 
             // Github_toast
             // 
-            radToastNotification2.BindingData = null;
-            radToastNotification2.DeliveryTime = new System.DateTimeOffset(1, 1, 1, 0, 0, 0, 0, System.TimeSpan.Parse("00:00:00"));
-            radToastNotification2.Name = "ToastGeneric1";
-            radToastNotification2.Tag = null;
-            radToastNotification2.TemplateType = Telerik.RadToastNotificationManager.RadToastTemplateType.ToastGeneric;
-            radToastNotification2.Xml = null;
-            this.Github_toast.ToastNotifications.Add(radToastNotification2);
+            radToastNotification3.BindingData = null;
+            radToastNotification3.DeliveryTime = new System.DateTimeOffset(1, 1, 1, 0, 0, 0, 0, System.TimeSpan.Parse("00:00:00"));
+            radToastNotification3.Name = "ToastGeneric1";
+            radToastNotification3.Tag = null;
+            radToastNotification3.TemplateType = Telerik.RadToastNotificationManager.RadToastTemplateType.ToastGeneric;
+            radToastNotification3.Xml = null;
+            this.Github_toast.ToastNotifications.Add(radToastNotification3);
             // 
             // Github_notify
             // 
@@ -283,15 +282,6 @@
             this.Github_notify.Text = "EZPCPM";
             this.Github_notify.BalloonTipClicked += new System.EventHandler(this.Github_notify_BalloonTipClicked);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 560);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "label1";
-            // 
             // tick
             // 
             this.tick.Enabled = true;
@@ -299,8 +289,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(233, 586);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(233, 562);
             this.Controls.Add(this.ToggleSwitch_ontop);
             this.Controls.Add(this.bunifuLabel2);
             this.Controls.Add(this.groupBox_Ram);
@@ -347,7 +336,6 @@
         private System.Windows.Forms.NotifyIcon Github_notify;
         private Telerik.WinControls.Themes.CrystalTheme crystalTheme1;
         private System.Windows.Forms.Timer tick;
-        public System.Windows.Forms.Label label1;
     }
 }
 

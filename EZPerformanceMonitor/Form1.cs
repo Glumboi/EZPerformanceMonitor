@@ -53,8 +53,6 @@ namespace EZPerformanceMonitor
                     bunifuRadialGauge_cpu.Value = _usages[0];
                     bunifuRadialGauge_ram.Value = _usages[1];
                     bunifuRadialGauge_gpu.Value = _usages[2];
-                    UiChanger.SetControlPropertyThreadSafe(label1, "Text", "Internet download speed: " + _in.CheckInternetSpeed().ToString() + " Kbps");
-                    //label1.Text = "Internet download speed: " + _in.CheckInternetSpeed().ToString() + " Kbps";
                 }
             });
         }
