@@ -12,6 +12,9 @@ An easy little tool that lets uou monitor you're ram, cpu and gpu usage written 
 
 # Features
 -Usage graph for Ram, CPU, GPU
+
 -Always ontop button
+
 -Notifyicon when minimizing
+
 -Context menu when right clicking the Notifyicon
