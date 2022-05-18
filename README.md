@@ -6,8 +6,11 @@ An easy little tool that lets uou monitor you're ram, cpu and gpu usage written 
 
 # Changelog
 
-# V1.1
+# V1.0
 -Initial release with all the features listed
+
+# V1.1
+-Fixed little bugs that caused unhandled exceptions
 
 
 # Features
