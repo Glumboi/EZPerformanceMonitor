@@ -15,6 +15,10 @@ An easy little tool that lets uou monitor you're ram, cpu and gpu usage written 
 
 -Always ontop button
 
+-Displays internet download speed
+
 -Notifyicon when minimizing
 
 -Context menu when right clicking the Notifyicon
+
+-Splash/Loading screen
