@@ -15,6 +15,15 @@ An easy little tool that lets you monitor you're ram, cpu and gpu usage written 
 # V1.2
 -Removed the download speed display due to inaccuracy 
 
+# V1.3
+-Fixed little quality of life issues such as:
+
+Contextmenu when rightclicking the NotifyIcon doesnt disappeare (now when leaving the Contextmenu after entering it with the mouse it closes automatically).
+
+App can be closed while in the splash screen (before it caused an unhandled exception).
+
+Changed the NotifyIcon Contextmenu style
+
 
 # Features
 -Usage graph for Ram, CPU, GPU
