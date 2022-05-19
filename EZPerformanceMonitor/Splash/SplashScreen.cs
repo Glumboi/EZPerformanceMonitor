@@ -6,12 +6,15 @@ using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EZPerformanceMonitor.Core;
 using Telerik.WinControls;
 
 namespace EZPerformanceMonitor.Splash
 {
     public partial class SplashScreen : System.Windows.Forms.Form
     {
+        ExtraFunctions _ext = new ExtraFunctions();
+        
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
@@ -28,6 +31,13 @@ namespace EZPerformanceMonitor.Splash
 
         private void SplashScreen_MouseDown(object sender, MouseEventArgs e)
         {
+            MouseEventArgs me = (MouseEventArgs) e;
+            
+            if (me.Button == MouseButtons.Right)
+            {
+                dragging = false;
+                return;
+            }
             dragging = true;
             dragCursorPoint = Cursor.Position;
             dragFormPoint = this.Location;
@@ -45,6 +55,11 @@ namespace EZPerformanceMonitor.Splash
         private void SplashScreen_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
+        }
+
+        private void SplashScreen_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _ext.CloseAll();
         }
     }
 }

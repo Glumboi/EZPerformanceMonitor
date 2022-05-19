@@ -33,7 +33,7 @@
             this.radFormConverter1 = new Telerik.WinControls.UI.RadFormConverter();
             this.radWaitingBar1 = new Telerik.WinControls.UI.RadWaitingBar();
             this.dotsRingWaitingBarIndicatorElement1 = new Telerik.WinControls.UI.DotsRingWaitingBarIndicatorElement();
-            ((System.ComponentModel.ISupportInitialize)(this.radWaitingBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.radWaitingBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -70,17 +70,17 @@
             this.Controls.Add(this.radWaitingBar1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Name = "SplashScreen";
             this.Text = "EZPCPM";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SplashScreen_FormClosing);
             this.Load += new System.EventHandler(this.SplashScreen_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SplashScreen_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SplashScreen_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SplashScreen_MouseUp);
-            ((System.ComponentModel.ISupportInitialize)(this.radWaitingBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.radWaitingBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
