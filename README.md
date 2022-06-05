@@ -26,7 +26,7 @@ Changed the NotifyIcon Contextmenu style
 
 
 # Features
--Usage graph for Ram, CPU, GPU
+-Usage graph for Ram, CPU and GPU
 
 -Always ontop button
 
