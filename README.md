@@ -24,6 +24,9 @@ App can be closed while in the splash screen (before it caused an unhandled exce
 
 Changed the NotifyIcon Contextmenu style
 
+# V1.4
+-Added rounded corners to the loading screen and did some guality of live improvements
+
 
 # Features
 -Usage graph for Ram, CPU and GPU
