@@ -2,7 +2,7 @@
 An easy little tool that lets you monitor you're ram, cpu and gpu usage written in C#, Winforms, .NET Framework 4.8
 
 # Image of the GUI
-![alt text](https://i.ibb.co/4JMXCvs/Screenshot-2022-06-02-185821.png)
+![alt text](https://i.imgur.com/8YXXgYI.png)
 
 # Changelog
 
