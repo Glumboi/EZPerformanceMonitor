@@ -29,3 +29,5 @@ F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\bin\Debug\Syst
 F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\bin\Debug\System.Memory.xml
 F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\bin\Debug\System.Numerics.Vectors.xml
 F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\obj\Debug\EZPerformanceMonitor.Splash.SplashScreen.resources
+F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\obj\Debug\EZPerformanceMonitor.Log.Log.resources

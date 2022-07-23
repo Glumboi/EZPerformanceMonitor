@@ -1,4 +1,5 @@
-﻿using System.Management;
+﻿using System;
+using System.Management;
 
 namespace EZPerformanceMonitor.Core
 {
@@ -56,6 +57,22 @@ namespace EZPerformanceMonitor.Core
         public string GetRamSize()
         {
             return (new Microsoft.VisualBasic.Devices.ComputerInfo().TotalPhysicalMemory / 1024 / 1024 / 1024).ToString() + "GB";
+        }
+        
+        //Returns Connected usb devices as a list example: ["USB Stick (Kingston)", "USB Stick (Kingston)"]
+        public string[] GetUsbDevices()
+        {
+            string[] usbDevices = new string[0];
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", "SELECT * FROM Win32_PnPEntity");
+            foreach (ManagementObject queryObj in searcher.Get())
+            {
+                if (queryObj["Name"].ToString().Contains("USB"))
+                {
+                    Array.Resize(ref usbDevices, usbDevices.Length + 1);
+                    usbDevices[usbDevices.Length - 1] = queryObj["Name"].ToString();
+                }
+            }
+            return usbDevices;
         }
     }
 }

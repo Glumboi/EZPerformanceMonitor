@@ -51,33 +51,6 @@ namespace EZPerformanceMonitor.Core
             return (int)gpuUsages.Average();
         }
 
-        private void SetGPUUsage(int average)
-        {
-
-            var gpuCounters = GetGPUCounters();
-
-            foreach (var counter in gpuCounters)
-            {
-                counter.RawValue = average;
-            }
-        }
-
-        private void SetRAMUsage(int average)
-        {
-
-            var ramCounter = new PerformanceCounter("Memory", "Available Memory");
-
-            ramCounter.RawValue = average;
-        }
-
-        private void SetCPUUsage(int average)
-        {
-
-            var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-
-            cpuCounter.RawValue = average;
-        }
-
         //Returns current CPU from 0-100 as an int
         private int GetCPUUsage()
         {

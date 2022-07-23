@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,11 +19,26 @@ namespace EZPerformanceMonitor.Splash
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
-
+        
+        //Used for roudned corners source:https://stackoverflow.com/questions/18822067/rounded-corners-in-c-sharp-windows-forms
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,     // x-coordinate of upper-left corner
+            int nTopRect,      // y-coordinate of upper-left corner
+            int nRightRect,    // x-coordinate of lower-right corner
+            int nBottomRect,   // y-coordinate of lower-right corner
+            int nWidthEllipse, // width of ellipse
+            int nHeightEllipse // height of ellipse
+        );
+        
         public SplashScreen()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.None;
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
+        
 
         private void SplashScreen_Load(object sender, EventArgs e)
         {
@@ -36,11 +52,20 @@ namespace EZPerformanceMonitor.Splash
             if (me.Button == MouseButtons.Right)
             {
                 dragging = false;
+                
+                radContextMenu1.Show(this, new Point(me.X, me.Y));
+                radContextMenu1.Items[0].Click += radContextMenu1_Click;
+                
                 return;
             }
             dragging = true;
             dragCursorPoint = Cursor.Position;
-            dragFormPoint = this.Location;
+            dragFormPoint = Location;
+        }
+
+        private void radContextMenu1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private void SplashScreen_MouseMove(object sender, MouseEventArgs e)
@@ -48,7 +73,7 @@ namespace EZPerformanceMonitor.Splash
             if (dragging)
             {
                 Point dif = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
-                this.Location = Point.Add(dragFormPoint, new Size(dif));
+                Location = Point.Add(dragFormPoint, new Size(dif));
             }
         }
 
