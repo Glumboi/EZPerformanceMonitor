@@ -2,21 +2,21 @@
 An easy little tool that lets you monitor you're ram, cpu and gpu usage written in C#, Winforms, .NET Framework 4.8
 
 # Image of the GUI
-![alt text](https://i.imgur.com/8YXXgYI.png)
+![alt text](https://i.imgur.com/FxYjiAX.png)
 
 # Changelog
 
 # V1.0
--Initial release with all the features listed
+- Initial release with all the features listed
 
 # V1.1
--Fixed little bugs that caused unhandled exceptions
+- Fixed little bugs that caused unhandled exceptions
 
 # V1.2
--Removed the download speed display due to inaccuracy 
+- Removed the download speed display due to inaccuracy 
 
 # V1.3
--Fixed little quality of life issues such as:
+- Fixed little quality of life issues such as:
 
 Contextmenu when rightclicking the NotifyIcon doesnt disappeare (now when leaving the Contextmenu after entering it with the mouse it closes automatically).
 
@@ -25,16 +25,19 @@ App can be closed while in the splash screen (before it caused an unhandled exce
 Changed the NotifyIcon Contextmenu style
 
 # V1.4
--Added rounded corners to the loading screen and did some guality of life improvements
+- Added rounded corners to the loading screen and did some guality of life improvements
+
+# V2.0
+- Remade the GUI to make it feel more modern and look better
 
 
 # Features
--Usage graph for Ram, CPU and GPU
+- Usage graph for Ram, CPU and GPU
 
--Always ontop button
+- Always ontop button
 
--Notifyicon when minimizing
+- Notifyicon when minimizing
 
--Context menu when right clicking the Notifyicon
+- Context menu when right clicking the Notifyicon
 
--Splash/Loading screen
+- Splash/Loading screen
