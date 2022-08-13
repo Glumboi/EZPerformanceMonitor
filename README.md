@@ -18,11 +18,11 @@ An easy little tool that lets you monitor you're ram, cpu and gpu usage written 
 # V1.3
 - Fixed little quality of life issues such as:
 
-Contextmenu when rightclicking the NotifyIcon doesnt disappeare (now when leaving the Contextmenu after entering it with the mouse it closes automatically).
+  Contextmenu when rightclicking the NotifyIcon doesnt disappeare (now when leaving the Contextmenu after entering it with the mouse it closes automatically).
 
-App can be closed while in the splash screen (before it caused an unhandled exception).
+  App can be closed while in the splash screen (before it caused an unhandled exception).
 
-Changed the NotifyIcon Contextmenu style
+  Changed the NotifyIcon Contextmenu style
 
 # V1.4
 - Added rounded corners to the loading screen and did some guality of life improvements
