@@ -31,6 +31,14 @@ An easy little tool that lets you monitor you're ram, cpu and gpu usage written 
 - Remade the GUI to make it feel more modern and look better
 
 
+# V2.1
+- Improved the code a little bit
+
+- Added a new feature that monitors your CPU's temperature 
+
+- Migrated to .NET Framework 4.8.1
+
+
 # Features
 - Usage graph for Ram, CPU and GPU
 
