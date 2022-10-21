@@ -38,6 +38,8 @@ An easy little tool that lets you monitor you're ram, cpu and gpu usage written 
 
 - Migrated to .NET Framework 4.8.1
 
+- Added a new feature that lets you enable a debug mode (press CTRL + O) 
+
 
 # Features
 - Usage graph for Ram, CPU and GPU
