@@ -31,3 +31,4 @@ F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\bin\Release\Sy
 F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\obj\Release\EZPerformanceMonitor.Splash.SplashScreen.resources
 F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\obj\Release\EZPerformanceMonitor.csproj.Fody.CopyLocal.cache
 F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\obj\Release\EZPerformanceMonitor.Log.Log.resources
+F:\visual studio\repos2\EZPerformanceMonitor\EZPerformanceMonitor\obj\Release\EZPerformanceMonitor.Debug.DebugSettingsForm.resources

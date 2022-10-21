@@ -31,22 +31,18 @@ namespace EZPerformanceMonitor.Log
             InitializeComponent();
         }
 
-        protected override void OnHandleCreated(EventArgs e)
-        {
-            if (DwmSetWindowAttribute(Handle, 19, new[] { 1 }, 4) != 0)
-                DwmSetWindowAttribute(Handle, 20, new[] { 1 }, 4);
-        }
-
         private void button_stoplog_Click(object sender, EventArgs e)
         {
             if (!_count)
             {
                 _count = true;
                 timer_checklogging.Start();
+                Program.debugConsole.Info("Started logging the usages");
             }
             else
             {
                 _count = false;
+                Program.debugConsole.Info("Stopped logging the usages");
             }
         }
 
@@ -87,12 +83,13 @@ namespace EZPerformanceMonitor.Log
             listBox1.BeginInvoke(del, _content);
             int visibleItems = listBox1.ClientSize.Height / listBox1.ItemHeight;
             listBox1.TopIndex = Math.Max(listBox1.Items.Count - visibleItems + 1, 0);
-
+            Program.debugConsole.Info($"Updated the log of the usages: {_content}");
         }
 
         private void button_clear_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
+            Program.debugConsole.Info($"Cleared the log of the usages");
         }
 
         private void UpdateUIListBox(string _str)
@@ -104,7 +101,7 @@ namespace EZPerformanceMonitor.Log
         {
             //Gets all items as string in the listbox and saves them to a .txt file called "log + currenttime.txt" 
             //with a save file dialog
-            string _content = "";
+            string _content = string.Empty;
             foreach (var item in listBox1.Items)
             {
                 _content += item.ToString() + "\n";
@@ -117,12 +114,13 @@ namespace EZPerformanceMonitor.Log
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 _ex.WriteToFile(_content, saveFileDialog1.FileName);
+                Program.debugConsole.Info($"Successfully exported the usages log to a text file called: {saveFileDialog1.FileName}");
             }
         }
 
         private void Log_Load(object sender, EventArgs e)
         {
-
+            Glumboi.UI.UIChanger.ChangeTitlebarToDark(Handle);
         }
     }
 }

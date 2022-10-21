@@ -5,36 +5,57 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows.Forms;
+using Glumboi.UI.Toast;
+using Glumboi.UI;
+using static EZPerformanceMonitor.Core.Temp;
+using Bunifu.UI.WinForms;
+using EZPerformanceMonitor.Debug;
 
 namespace EZPerformanceMonitor
 {
     public partial class Form1 : Form
     {
-        [DllImport("DwmApi")] //System.Runtime.InteropServices
-        private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
+        public BunifuRadialGauge[] Gauges { get => GetRadialGauges(); }
+        public List<int> Usages { get => USAGE.Usages(); }
 
-        protected override void OnHandleCreated(EventArgs e)
-        {
-            if (DwmSetWindowAttribute(Handle, 19, new[] { 1 }, 4) != 0)
-                DwmSetWindowAttribute(Handle, 20, new[] { 1 }, 4);
-        }
+        //Readonly variables used to get the usage and specs of a computer
+        private readonly SystemUsage USAGE = new SystemUsage();
+        private readonly GetSpecs SPECS = new GetSpecs();
 
-        private readonly SystemUsage _usage = new SystemUsage();
-        private readonly GetSpecs _specs = new GetSpecs();
-        private readonly VersionControl _version = new VersionControl();
-        private readonly SplashScreen _splash = new SplashScreen();
-        private readonly ExtraFunctions _ext = new ExtraFunctions();
-        private readonly Log.Log _log = new Log.Log();
+        //Readonly variable to compare the apps github vesion to the local one
+        private readonly VersionControl VERSION = new VersionControl();
+
+        //Readonly Forms used in the app
+        private readonly SplashScreen SPLASH = new SplashScreen();
+        private readonly Log.Log LOG = new Log.Log();
+        private readonly DebugSettingsForm DEBUGFORM = new DebugSettingsForm();
+
+        //Readonly class to execute extra functions such as writing to a file
+        private readonly ExtraFunctions EXT = new ExtraFunctions();
+
+        //Variables used front-end
         private bool _ontop;
+
+        private bool _reachedLimitRam = false;
+        private bool _reachedLimitCPU = false;
 
         public Form1()
         {
             InitializeComponent();
+        }
+
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            UIChanger.ChangeTitlebarToDark(Handle); //Calls to my dll
+        }
+
+        private BunifuRadialGauge[] GetRadialGauges()
+        {
+            BunifuRadialGauge[] radialGauges = { bunifuRadialGauge_cpu, bunifuRadialGauge_ram, bunifuRadialGauge_gpu };
+
+            return radialGauges;
         }
 
         private async Task<string> GetGithubVersionAsync()
@@ -50,20 +71,52 @@ namespace EZPerformanceMonitor
             return latestGitHubVersion.ToString();
         }
 
+        void InitHotkeys()
+        {
+            Program.debugConsole.Info("Hotkeys has been loaded");
+            Hotkeys.LoadHotkeys(this);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x0312 when m.WParam.ToInt32() == (int)Hotkeys.HotkeyIDs.HotkeyID:
+                    DEBUGFORM.Show();
+                    break;
+            }
+
+            base.WndProc(ref m);
+        }
+
         private async void Form1_Load(object sender, EventArgs e)
         {
-            GetSettings();
+            InitHotkeys();
 
+            await GetSettings();
+
+            //Updates the gauges as long as the process is running
             await Task.Run(() =>
             {
-                while (Process.GetProcessesByName(Assembly.GetExecutingAssembly().GetName().Name).Length > 0)
-                {
-                    List<int> usages = _usage.Usages();
-                    bunifuRadialGauge_cpu.Value = usages[0];
-                    bunifuRadialGauge_ram.Value = usages[1];
-                    bunifuRadialGauge_gpu.Value = usages[2];
-                }
+                UpdateUsages();
             });
+        }
+
+        private Task UpdateUsages()
+        {
+            while (Process.GetProcessesByName(Assembly.GetExecutingAssembly().GetName().Name).Length > 0)
+            {
+                Gauges[0].Value = Usages[0];
+                Gauges[1].Value = Usages[1];
+                Gauges[2].Value = Usages[2];
+
+                label_cpuTemp.Invoke((MethodInvoker)delegate
+                {
+                    label_cpuTemp.Text = label_cpuTemp.Text = GetSystemInfo() + "°C";
+                });
+            }
+
+            return Task.CompletedTask;
         }
 
         private void SaveSettings()
@@ -72,14 +125,13 @@ namespace EZPerformanceMonitor
             Properties.Settings.Default.Save();
         }
 
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            MinimizeIcon.Dispose();
             SaveSettings();
-
-            _ext.CloseAll();
+            EXT.CloseAll();
         }
-        
+
         private async Task GetSettings()
         {
             _ontop = Properties.Settings.Default.ontop;
@@ -93,32 +145,36 @@ namespace EZPerformanceMonitor
                 ToggleOnTop(false);
             }
 
-            groupBox_CPU.Text = _specs.GetCpuName();
-            groupBox_GPU.Text = _specs.GetGpuName();
-            groupBox_Ram.Text = _specs.GetRamClock() + " (" + _specs.GetRamSize() + ")";
+            groupBox_CPU.Text = SPECS.GetCpuName();
+            groupBox_GPU.Text = SPECS.GetGpuName();
+            groupBox_Ram.Text = SPECS.GetRamClock() + " (" + SPECS.GetRamSize() + ")";
 
-            if (await _version.CheckGitHubNewerVersion())
+            if (await VERSION.CheckGitHubNewerVersion())
             {
                 DialogResult _dlg = MessageBox.Show("There is a new version available!\n\n" +
                                                     "Do you want to download it now?\n\n" +
                                                     "Current Version: " +
                                                     Assembly.GetExecutingAssembly().GetName().Version + "\n" +
                                                     "New Version: " + await GetGithubVersionAsync(), "Update Available",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (_dlg == DialogResult.Yes)
                 {
                     Process.Start("https://github.com/Glumboi/EZPerformanceMonitor/releases/");
                 }
             }
+
+            Program.debugConsole.Info("CPU of the system: " + SPECS.GetCpuName());
+            Program.debugConsole.Info("GPU of the system: " + SPECS.GetGpuName());
+            Program.debugConsole.Info("RAM size of the system: " + SPECS.GetRamSize());
         }
 
         private void ShowWindow()
         {
             if (WindowState == FormWindowState.Minimized)
             {
-                if(_log.WindowState == FormWindowState.Minimized)
+                if (LOG.WindowState == FormWindowState.Minimized)
                 {
-                    _log.Show();
+                    LOG.Show();
                 }
                 Show();
                 WindowState = FormWindowState.Normal;
@@ -127,16 +183,16 @@ namespace EZPerformanceMonitor
             radContextMenu_notify.DropDown.Hide();
         }
 
+        //Checks if the Form is minimized or not and shows a notification if it is and hides the app
         private void Form1_Resize(object sender, EventArgs e)
         {
-            MinimizeIcon.BalloonTipTitle = "App minimized to tray";
-            MinimizeIcon.BalloonTipText =
-                "App successfully minimized to tray.\nDouble click on it to show the window again.";
+            string _toastTitle = "App minimized to tray";
+            string _toastContent = "App successfully minimized to tray.\nDouble click on it to show the window again.";
 
             if (FormWindowState.Minimized == WindowState)
             {
                 MinimizeIcon.Visible = true;
-                MinimizeIcon.ShowBalloonTip(500);
+                ToastHandler.ShowToast(_toastContent, _toastTitle);
                 Hide();
             }
             else if (FormWindowState.Normal == WindowState)
@@ -180,10 +236,10 @@ namespace EZPerformanceMonitor
             ShowWindow();
         }
 
-        private void ToggleOnTop(bool _tf )
+        private void ToggleOnTop(bool trueFalse)
         {
-            _ontop = _tf;
-            TopMost = _tf;
+            _ontop = trueFalse;
+            TopMost = trueFalse;;
         }
 
         private void ToggleSwitch_ontop_ValueChanged(object sender, Bunifu.UI.WinForms.BunifuCheckBox.CheckedChangedEventArgs e)
@@ -198,33 +254,74 @@ namespace EZPerformanceMonitor
             }
         }
 
+        //Checks if all usages are 0 and if so, it shows a loading screen so the program doesn't look like its frozen
         private void OnTick(object sender, EventArgs e)
         {
-            if (bunifuRadialGauge_cpu.Value == 0 && 
+            if (bunifuRadialGauge_cpu.Value == 0 &&
                 bunifuRadialGauge_ram.Value == 0 &&
                 bunifuRadialGauge_gpu.Value == 0)
             {
                 Hide();
-                _splash.Show();
+                SPLASH.Show();
             }
             else
             {
                 Show();
-                _splash.Hide();
-                
+                SPLASH.Hide();
+                SPLASH.StopAnimation();
+
                 tick.Stop();
+                Program.debugConsole.Info("Splash/Loading screen is done");
             }
         }
-        
+
         private void ShowLogWindow()
         {
-            _log._count = true;
-            _log.Show();
+            LOG._count = true; //Used to start-stop the log counting
+            LOG.Show();
         }
 
         private void button_log_Click(object sender, EventArgs e)
         {
             ShowLogWindow();
+        }
+
+        private void bunifuRadialGauge_ram_ValueChanged(object sender, Bunifu.UI.WinForms.BunifuRadialGauge.ValueChangedEventArgs e)
+        {
+            var compareRes = CheckUsageTooHigh.ComprareUsageToWarning(bunifuRadialGauge_ram.Value, bunifuRadialGauge_ram.WarningMark);
+
+            if (!compareRes) _reachedLimitRam = false;
+
+            if (_reachedLimitRam) return;
+
+            if (compareRes)
+            {
+                string _toastTitle = "RAM Usage Warning";
+                string _toastContent = "Your RAM usage is very high.\nPlease make sure you have enough RAM. And maybe close a couple things that drains it!";
+
+                ToastHandler.ShowToast(_toastContent, _toastTitle);
+
+                _reachedLimitRam = true;
+            }
+        }
+
+        private void bunifuRadialGauge_cpu_ValueChanged(object sender, Bunifu.UI.WinForms.BunifuRadialGauge.ValueChangedEventArgs e)
+        {
+            var compareRes = CheckUsageTooHigh.ComprareUsageToWarning(bunifuRadialGauge_cpu.Value, bunifuRadialGauge_cpu.WarningMark);
+
+            if (!compareRes) _reachedLimitCPU = false;
+
+            if (_reachedLimitCPU) return;
+
+            if (compareRes)
+            {
+                string _toastTitle = "CPU Usage Warning";
+                string _toastContent = "Your CPU usage is very high.\nI recommend you to close some applications that drain your CPU.";
+
+                ToastHandler.ShowToast(_toastContent, _toastTitle);
+
+                _reachedLimitCPU = true;
+            }
         }
     }
 }

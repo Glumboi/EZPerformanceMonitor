@@ -46,7 +46,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(96, 101);
+            this.label1.Location = new System.Drawing.Point(97, 153);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 28);
             this.label1.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // radWaitingBar1
             // 
-            this.radWaitingBar1.Location = new System.Drawing.Point(106, 28);
+            this.radWaitingBar1.Location = new System.Drawing.Point(106, -72);
             this.radWaitingBar1.Name = "radWaitingBar1";
             this.radWaitingBar1.Size = new System.Drawing.Size(70, 70);
             this.radWaitingBar1.TabIndex = 2;
@@ -69,7 +69,11 @@
             // 
             // dotsRingWaitingBarIndicatorElement1
             // 
+            this.dotsRingWaitingBarIndicatorElement1.DisabledTextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             this.dotsRingWaitingBarIndicatorElement1.Name = "dotsRingWaitingBarIndicatorElement1";
+            this.dotsRingWaitingBarIndicatorElement1.Text = "";
+            this.dotsRingWaitingBarIndicatorElement1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.dotsRingWaitingBarIndicatorElement1.UseCompatibleTextRendering = false;
             // 
             // radContextMenu1
             // 

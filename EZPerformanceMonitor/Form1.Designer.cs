@@ -46,6 +46,7 @@
             this.bunifuLabel3 = new Bunifu.UI.WinForms.BunifuLabel();
             this.button_logwindow = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.groupBox_CPU = new System.Windows.Forms.GroupBox();
+            this.label_cpuTemp = new System.Windows.Forms.Label();
             this.bunifuRadialGauge_cpu = new Bunifu.UI.WinForms.BunifuRadialGauge();
             this.groupBox_Ram = new System.Windows.Forms.GroupBox();
             this.bunifuRadialGauge_ram = new Bunifu.UI.WinForms.BunifuRadialGauge();
@@ -302,6 +303,7 @@
             // groupBox_CPU
             // 
             this.groupBox_CPU.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.groupBox_CPU.Controls.Add(this.label_cpuTemp);
             this.groupBox_CPU.Controls.Add(this.bunifuRadialGauge_cpu);
             this.groupBox_CPU.ForeColor = System.Drawing.Color.White;
             this.groupBox_CPU.Location = new System.Drawing.Point(11, 7);
@@ -310,6 +312,14 @@
             this.groupBox_CPU.TabIndex = 36;
             this.groupBox_CPU.TabStop = false;
             this.groupBox_CPU.Text = "groupBox2";
+            // 
+            // label_cpuTemp
+            // 
+            this.label_cpuTemp.Location = new System.Drawing.Point(48, 136);
+            this.label_cpuTemp.Name = "label_cpuTemp";
+            this.label_cpuTemp.Size = new System.Drawing.Size(118, 13);
+            this.label_cpuTemp.TabIndex = 12;
+            this.label_cpuTemp.Text = "CPU Package: 51°C";
             // 
             // bunifuRadialGauge_cpu
             // 
@@ -347,6 +357,7 @@
             this.bunifuRadialGauge_cpu.ValueByTransition = 0;
             this.bunifuRadialGauge_cpu.ValueLabelColor = System.Drawing.Color.White;
             this.bunifuRadialGauge_cpu.WarningMark = 90;
+            this.bunifuRadialGauge_cpu.ValueChanged += new System.EventHandler<Bunifu.UI.WinForms.BunifuRadialGauge.ValueChangedEventArgs>(this.bunifuRadialGauge_cpu_ValueChanged);
             // 
             // groupBox_Ram
             // 
@@ -396,6 +407,7 @@
             this.bunifuRadialGauge_ram.ValueByTransition = 0;
             this.bunifuRadialGauge_ram.ValueLabelColor = System.Drawing.Color.White;
             this.bunifuRadialGauge_ram.WarningMark = 90;
+            this.bunifuRadialGauge_ram.ValueChanged += new System.EventHandler<Bunifu.UI.WinForms.BunifuRadialGauge.ValueChangedEventArgs>(this.bunifuRadialGauge_ram_ValueChanged);
             // 
             // groupBox_GPU
             // 
@@ -466,7 +478,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(223, 562);
+            this.ClientSize = new System.Drawing.Size(225, 562);
             this.Controls.Add(this.bunifuPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -511,6 +523,7 @@
         private Bunifu.UI.WinForms.BunifuLabel bunifuLabel3;
         private Bunifu.UI.WinForms.BunifuCheckBox ToggleSwitch_ontop;
         private Telerik.WinControls.Themes.CrystalDarkTheme crystalDarkTheme1;
+        private System.Windows.Forms.Label label_cpuTemp;
     }
 }
 

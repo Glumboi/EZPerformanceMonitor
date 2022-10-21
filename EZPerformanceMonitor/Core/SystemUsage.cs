@@ -10,17 +10,14 @@ namespace EZPerformanceMonitor.Core
 {
     internal class SystemUsage
     {
-        public List<int> Usages()
+        public List<int> Usages() => new List<int>()
         {
-            List<int> usages = new List<int>();
-            usages.Add(GetCPUUsage());
-            usages.Add(GetRAMUsage());
-            usages.Add((int)GetGPUUsage().Result);
+            GetCPUUsage(),
+            GetRAMUsage(),
+            (int)GetGPUUsage().Result
+        };
 
-            return usages;
-        }
-
-        private List<PerformanceCounter> GetGPUCounters()
+        public List<PerformanceCounter> GetGPUCounters()
         {
             var category = new PerformanceCounterCategory("GPU Engine");
             var counterNames = category.GetInstanceNames();
@@ -34,27 +31,13 @@ namespace EZPerformanceMonitor.Core
             return gpuCounters;
         }
 
-
-        //Records the avg of the GPU usage for 10 seconds
-        public async Task<int> GetGpuUsageAvg()
-        {
-            var gpuCounters = GetGPUCounters();
-
-            var gpuUsages = new List<int>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                gpuUsages.Add((int)gpuCounters.Sum(counter => counter.NextValue()));
-                await Task.Delay(1000);
-            }
-
-            return (int)gpuUsages.Average();
-        }
-
         //Returns current CPU from 0-100 as an int
-        private int GetCPUUsage()
-        {
-            var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+        public int GetCPUUsage()
+        {   
+            //Alternative method
+            //var cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+
+            var cpuCounter = new PerformanceCounter("Processor Information", "% Processor Utility", "_Total");
             cpuCounter.NextValue();
             Thread.Sleep(1000);
             var cpuUsage = cpuCounter.NextValue();
@@ -62,7 +45,7 @@ namespace EZPerformanceMonitor.Core
         }
 
         //Returns current RAM usage from 0-100 as an int
-        private int GetRAMUsage()
+        public int GetRAMUsage()
         {
             var wmiObject = new ManagementObjectSearcher("select * from Win32_OperatingSystem");
 
@@ -80,7 +63,7 @@ namespace EZPerformanceMonitor.Core
             return 0;
         }
 
-        private async Task<float> GetGPUUsage()
+        public async Task<float> GetGPUUsage()
         {
             try
             {

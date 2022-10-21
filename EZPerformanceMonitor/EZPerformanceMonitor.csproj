@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Gaming.XboxGameBar.5.8.220627001\build\Microsoft.Gaming.XboxGameBar.props" Condition="Exists('..\packages\Microsoft.Gaming.XboxGameBar.5.8.220627001\build\Microsoft.Gaming.XboxGameBar.props')" />
   <Import Project="..\packages\Resource.Embedder.2.2.0\build\Resource.Embedder.props" Condition="Exists('..\packages\Resource.Embedder.2.2.0\build\Resource.Embedder.props')" />
   <Import Project="..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -10,7 +11,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>EZPerformanceMonitor</RootNamespace>
     <AssemblyName>EZPerformanceMonitor</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -32,6 +33,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <LangVersion>9</LangVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -55,7 +57,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Images\Icon_darkmode.ico</ApplicationIcon>
+    <ApplicationIcon>Icon_darkmode.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -80,6 +82,9 @@
     </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuDatePicker">
       <HintPath>..\..\..\..\BunifuCrack-main\Bunifu.UI.WinForms.BunifuDatePicker.dll</HintPath>
+    </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuDropdown">
+      <HintPath>..\..\..\..\BunifuCrack-main\Bunifu.UI.WinForms.BunifuDropdown.dll</HintPath>
     </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuGauge">
       <HintPath>..\..\..\..\BunifuCrack-main\Bunifu.UI.WinForms.BunifuGauge.dll</HintPath>
@@ -108,6 +113,9 @@
     <Reference Include="Bunifu.UI.WinForms.BunifuShadowPanel">
       <HintPath>..\..\..\..\BunifuCrack-main\Bunifu.UI.WinForms.BunifuShadowPanel.dll</HintPath>
     </Reference>
+    <Reference Include="Bunifu.UI.WinForms.BunifuSlider">
+      <HintPath>..\..\..\..\BunifuCrack-main\Bunifu.UI.WinForms.BunifuSlider.dll</HintPath>
+    </Reference>
     <Reference Include="Bunifu.UI.WinForms.BunifuSnackbar">
       <HintPath>..\..\..\..\BunifuCrack-main\Bunifu.UI.WinForms.BunifuSnackbar.dll</HintPath>
     </Reference>
@@ -125,6 +133,12 @@
     </Reference>
     <Reference Include="DarkUI">
       <HintPath>..\..\..\..\DarkUI\DarkUI\bin\Debug\DarkUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Glumboi.Debug">
+      <HintPath>..\..\..\..\Glumboi dlls\Glumboi.Debug\Glumboi.Debug\bin\Release\Glumboi.Debug.dll</HintPath>
+    </Reference>
+    <Reference Include="Glumboi.UI">
+      <HintPath>..\..\..\..\Glumboi dlls\Glumboi.UI\Glumboi.UI\bin\Release\Glumboi.UI.dll</HintPath>
     </Reference>
     <Reference Include="HardwareProviders.CPU.Standard, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HardwareProviders.CPU.Standard.2.0.1\lib\netstandard2.0\HardwareProviders.CPU.Standard.dll</HintPath>
@@ -146,6 +160,10 @@
     <Reference Include="Octokit, Version=0.51.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Octokit.0.51.0\lib\net46\Octokit.dll</HintPath>
     </Reference>
+    <Reference Include="OpenHardwareMonitorLib, Version=0.9.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\OpenHardwareMonitorLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
@@ -161,6 +179,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
       <Private>True</Private>
@@ -294,6 +313,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -337,19 +357,29 @@
     <Reference Include="Telerik.Windows.Documents.Core, Version=2022.1.106.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7" />
     <Reference Include="Telerik.Windows.MediaFoundation, Version=2022.1.111.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7" />
     <Reference Include="TelerikCommon, Version=2022.1.118.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e" />
+    <Reference Include="Transitions, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\dot-net-transitions.1.2.1.0\lib\net40-full\Transitions.dll</HintPath>
+    </Reference>
     <Reference Include="Uno.Diagnostics.Eventing, Version=255.255.255.255, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Uno.Diagnostics.Eventing.2.0.1\lib\netstandard2.0\Uno.Diagnostics.Eventing.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\CheckUsageTooHigh.cs" />
     <Compile Include="Core\ExtraFunctions.cs" />
     <Compile Include="Core\GetSpecs.cs" />
-    <Compile Include="Core\GetTemp.cs" />
+    <Compile Include="Core\Hotkeys.cs" />
+    <Compile Include="Core\Temp.cs" />
     <Compile Include="Core\Internet.cs" />
     <Compile Include="Core\SystemUsage.cs" />
-    <Compile Include="Core\UiChanger.cs" />
     <Compile Include="Core\VersionControl.cs" />
+    <Compile Include="Debug\DebugSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debug\DebugSettingsForm.Designer.cs">
+      <DependentUpon>DebugSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -370,6 +400,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Debug\DebugSettingsForm.resx">
+      <DependentUpon>DebugSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -406,8 +439,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Content Include="Icon_alt.ico" />
+    <Content Include="Icon_darkmode.ico" />
     <Content Include="Images\Icon.ico" />
     <Content Include="Images\Icon.png" />
+    <Content Include="Images\Icon_alt.ico" />
+    <Content Include="Images\Icon_alt.png" />
     <Content Include="Images\Icon_darkmode.ico" />
     <Content Include="Images\Icon_darkmode.png" />
     <Content Include="OpenHardwareMonitorLib.dll" />
@@ -436,10 +473,21 @@
     <Error Condition="!Exists('..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.props'))" />
     <Error Condition="!Exists('..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.targets'))" />
     <Error Condition="!Exists('..\packages\Resource.Embedder.2.2.0\build\Resource.Embedder.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Resource.Embedder.2.2.0\build\Resource.Embedder.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Gaming.XboxGameBar.5.8.220627001\build\Microsoft.Gaming.XboxGameBar.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gaming.XboxGameBar.5.8.220627001\build\Microsoft.Gaming.XboxGameBar.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Gaming.XboxGameBar.5.8.220627001\build\Microsoft.Gaming.XboxGameBar.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Gaming.XboxGameBar.5.8.220627001\build\Microsoft.Gaming.XboxGameBar.targets'))" />
   </Target>
   <Import Project="..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets" Condition="Exists('..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets')" />
   <Import Project="..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets" Condition="Exists('..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')" />
   <Import Project="..\packages\Uno.SourceGenerationTasks.4.0.2\build\netstandard1.0\Uno.SourceGenerationTasks.targets" Condition="Exists('..\packages\Uno.SourceGenerationTasks.4.0.2\build\netstandard1.0\Uno.SourceGenerationTasks.targets')" />
   <Import Project="..\packages\Fody.6.6.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.6.0\build\Fody.targets')" />
   <Import Project="..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.targets" Condition="Exists('..\packages\Costura.Fody.5.8.0-alpha0098\build\Costura.Fody.targets')" />
+  <Import Project="..\packages\Microsoft.Gaming.XboxGameBar.5.8.220627001\build\Microsoft.Gaming.XboxGameBar.targets" Condition="Exists('..\packages\Microsoft.Gaming.XboxGameBar.5.8.220627001\build\Microsoft.Gaming.XboxGameBar.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

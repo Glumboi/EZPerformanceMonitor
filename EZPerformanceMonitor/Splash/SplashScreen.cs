@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using EZPerformanceMonitor.Core;
-using Telerik.WinControls;
+using Glumboi.UI;
+using Transitions;
 
 namespace EZPerformanceMonitor.Splash
 {
     public partial class SplashScreen : System.Windows.Forms.Form
     {
-        ExtraFunctions _ext = new ExtraFunctions();
-        
+        ExtraFunctions ext = new ExtraFunctions();
+        AnimateText textAnimator;
+
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
-        
+
         //Used for roudned corners source:https://stackoverflow.com/questions/18822067/rounded-corners-in-c-sharp-windows-forms
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -38,10 +36,37 @@ namespace EZPerformanceMonitor.Splash
             this.FormBorderStyle = FormBorderStyle.None;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
-        
 
+        private void AnimateControls()
+        {
+            //Animates the waiting bar
+            Transition transition1 = new Transition(new TransitionType_EaseInEaseOut(1000));
+
+            transition1.add(radWaitingBar1, "Top", 22);
+            transition1.add(label1, "Top", 95);
+
+            transition1.run();
+
+            //Animates the label
+            string[] stringsForAnimation = {
+                "Loading",
+                "Loading.",
+                "Loading..",
+                "Loading..."
+            };
+
+            textAnimator = new AnimateText(label1, stringsForAnimation, 300);
+            textAnimator.Run();
+        }
+
+        public void StopAnimation()
+        {   
+            textAnimator.Stop();
+        }
+        
         private void SplashScreen_Load(object sender, EventArgs e)
         {
+            AnimateControls();
             radWaitingBar1.StartWaiting();
         }
 
@@ -84,7 +109,7 @@ namespace EZPerformanceMonitor.Splash
 
         private void SplashScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _ext.CloseAll();
+            ext.CloseAll();
         }
     }
 }

@@ -43,13 +43,13 @@ namespace EZPerformanceMonitor.Core
             }
             else if (versionComparison > 0)
             {
-                Debug.WriteLine("The local is higher than github");
+                Program.debugConsole.Info($"The local version of the app is higher than the version on github github (local version: {localVersion})");
                 //This local version is greater than the release version on GitHub.
                 return false;
             }
             else
             {
-                Debug.WriteLine("The versions are equal");
+                Program.debugConsole.Info("The versions of the app is equal to the gtihub version");
                 //This local Version and the Version on GitHub are equal.
                 return false;
             }
